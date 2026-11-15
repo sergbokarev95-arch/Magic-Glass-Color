@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<linearGradient id="gold" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#FFF0B5"/><stop offset=".42" stop-color="#FFC85F"/><stop offset="1" stop-color="#E78B1B"/></linearGradient>
+<linearGradient id="badge" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCE5F0"/></linearGradient>
+<linearGradient id="ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#515E70"/><stop offset="1" stop-color="#222C3C"/></linearGradient>
+</defs>
+<!-- stacked documents -->
+<rect x="113" y="91" width="288" height="248" rx="25" fill="#D99537" stroke="#FFDB8B" stroke-width="7"/>
+<rect x="128" y="107" width="255" height="216" rx="17" fill="#FFF2D7"/>
+<rect x="103" y="123" width="286" height="226" rx="24" fill="#2798E6" stroke="#B8E8FF" stroke-width="7"/>
+<rect x="89" y="149" width="295" height="214" rx="24" fill="#43C83E" stroke="#B2F89E" stroke-width="7"/>
+<rect x="105" y="193" width="286" height="178" rx="22" fill="#54B6ED" stroke="#B7EAFF" stroke-width="6"/>
+<!-- folder -->
+<path d="M80 213 Q80 185 110 185 H205 Q221 185 235 169 L252 153 Q263 143 283 143 H394 Q429 143 429 181 V375 Q429 411 392 411 H116 Q80 411 80 375 Z" fill="url(#gold)" stroke="#D78926" stroke-width="8" stroke-linejoin="round"/>
+<path d="M100 215 Q100 201 115 201 H211 Q230 201 243 187 L260 171 Q268 162 285 162 H389 Q409 162 409 183 V231 H100Z" fill="#FFE4A2" opacity=".58"/>
+<!-- badge attached to folder, not a background tile -->
+<rect x="178" y="248" width="210" height="204" rx="43" fill="url(#badge)" stroke="#FFFFFF" stroke-width="8"/>
+<rect x="188" y="258" width="190" height="184" rx="36" fill="none" stroke="#B9C4D2" stroke-width="3"/>
+<path d="M238 398 V306 Q238 292 252 292 H328 Q343 292 343 307 Q343 321 328 321 H271 V341 H316 Q331 341 331 355 Q331 369 316 369 H271 V398 Q271 413 255 413 Q238 413 238 398Z" fill="url(#ink)"/>
+</svg>
