@@ -1,0 +1,31 @@
+name: Build Magic Glass Color 0.4.25
+on:
+  push:
+    paths:
+      - '.github/workflows/build-0425.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install cairosvg pillow
+      - name: Fetch 0.4.24 base
+        run: |
+          curl -fL --retry 3 -o Magic_Glass_Color_0.4.24_Wildberries_TEST.hnt "https://github.com/sergbokarev95-arch/Magic-Glass-Color/releases/download/v0.4.24/Magic_Glass_Color_0.4.24_Wildberries_TEST.hnt"
+      - name: Build and verify
+        run: python scripts/build_0425.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Magic-Glass-Color-0.4.25
+          path: dist/*.hnt
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v0.4.25 dist/*.hnt --target main --title "Magic Glass Color 0.4.25" --notes "Wildberries: horizontally centered wb mark, same color, size and shape. All other icons preserved and archive verified." --latest
