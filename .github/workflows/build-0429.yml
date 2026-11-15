@@ -1,0 +1,31 @@
+name: Build Magic Glass Color 0.4.29
+on:
+  push:
+    paths:
+      - '.github/workflows/build-0429.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install cairosvg pillow
+      - name: Fetch 0.4.28 base
+        run: |
+          curl -fL --retry 3 -o Magic_Glass_Color_0.4.28_Drom_TEST.hnt "https://github.com/sergbokarev95-arch/Magic-Glass-Color/releases/download/v0.4.28/Magic_Glass_Color_0.4.28_Drom_TEST.hnt"
+      - name: Build and verify
+        run: python scripts/build_0429.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Magic-Glass-Color-0.4.29
+          path: dist/*.hnt
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v0.4.29 dist/*.hnt --target main --title "Magic Glass Color 0.4.29" --notes "Drom Auto: approved red abstract car symbol, transparent background, no circle. Previous icons preserved." --latest
