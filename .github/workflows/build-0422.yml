@@ -1,0 +1,31 @@
+name: Build Magic Glass Color 0.4.22
+on:
+  push:
+    paths:
+      - '.github/workflows/build-0422.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install cairosvg
+      - name: Fetch 0.4.21 base
+        run: |
+          curl -fL --retry 3 -o Magic_Glass_Color_0.4.21_Avito_TEST.hnt "https://github.com/sergbokarev95-arch/Magic-Glass-Color/releases/download/v0.4.21/Magic_Glass_Color_0.4.21_Avito_TEST.hnt"
+      - name: Build and verify
+        run: python scripts/build_0422.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Magic-Glass-Color-0.4.22
+          path: dist/*.hnt
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v0.4.22 dist/*.hnt --target main --title "Magic Glass Color 0.4.22" --notes "OZON: blue OZO and magenta N wordmark, transparent background, no circular badge. Previous icons preserved." --latest
